@@ -9,8 +9,7 @@ const org = 'giterate';
 const outputFile = './repoTemplate.tf';
 
 const repo = new Repos({
-  // source: 'giterate/test-fixture',
-  source: 'giterate/probot-hello-world-target',
+  source: 'giterate/test-fixture',
   hulk: new Githulk({ token: process.env.GITHUB_TOKEN })
 });
 
@@ -20,7 +19,7 @@ const repos = [
   // { name: 'terraform' },
   // { name: 'probot-hello-world' },
   // { name: 'probot-hello-world-target' },
-  { name: 'test-fixture' },
+  { name: 'test-fixture-mutable' },
 ];
 
 const tfFilePreamble =
