@@ -6,7 +6,10 @@ module.exports = async function ({ org, repo, repos }) {
   return repos.map(repo => {
     return labels.map(label => {
       return `
-resource "github_issue_label" "${repo.name}" {
+###
+## Assign label ${label.name} to ${repo.name} issues
+###
+resource "github_issue_label" "${repo.name}-${label.name.replace(/ /gi, '-').toLowerCase()}" {
   repository = "${repo.name}"
   name = "${label.name}"
   color = "${label.color}"

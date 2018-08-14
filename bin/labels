@@ -1,22 +1,42 @@
 #!/usr/bin/env node
 
+const fs = require('fs');
 const Repos = require('giterate/repos');
 const labels = require('../labels');
 const Githulk = require('githulk');
 
+const org = 'giterate';
+const outputFile = './repoTemplate.tf';
+
 const repo = new Repos({
-  source: 'giterate/test-fixture',
-  hulk: new Githulk({ token: process.env.GIT_TOKEN })
+  // source: 'giterate/test-fixture',
+  source: 'giterate/probot-hello-world-target',
+  hulk: new Githulk({ token: process.env.GITHUB_TOKEN })
 });
 
 const repos = [
-  { name: 'giterate' },
-  { name: 'create-terraform-file' },
-  { name: 'terraform' },
-  { name: 'probot-hello-world' },
-  { name: 'probot-hello-world-target' },
+  // { name: 'giterate' },
+  // { name: 'create-terraform-file' },
+  // { name: 'terraform' },
+  // { name: 'probot-hello-world' },
+  // { name: 'probot-hello-world-target' },
+  { name: 'test-fixture' },
 ];
 
+const tfFilePreamble =
+`###
+## <1> The two properties that need to be set are \`token\` and \`organization\`. You can hardcode them right in
+##     this provider block (very unrecommended) but the better option is to set the \`GITHUB_TOKEN\` 
+##     and \`GITHUB_ORGANIZATION\` environment variables. Terraform will see those and configure the provider with them.
+###
+provider "github" {
+  organization = "${org}"
+}
+`;
+
+const tfFileBlocks = [ tfFilePreamble ];
+
 labels({ repo, repos }).then(content => {
-  console.log(content);
+  tfFileBlocks.push(content);
+  fs.writeFile(outputFile, tfFileBlocks.join('\n'));
 });
