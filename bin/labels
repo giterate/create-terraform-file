@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+const Repos = require('giterate/repos');
+const labels = require('../labels');
+const Githulk = require('githulk');
+
+const repo = new Repos({
+  source: 'giterate/test-fixture',
+  hulk: new Githulk({ token: process.env.GIT_TOKEN })
+});
+
+const repos = [
+  { name: 'giterate' },
+  { name: 'create-terraform-file' },
+  { name: 'terraform' },
+  { name: 'probot-hello-world' },
+  { name: 'probot-hello-world-target' },
+];
+
+labels({ repo, repos }).then(content => {
+  console.log(content);
+});

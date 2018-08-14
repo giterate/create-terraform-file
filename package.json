@@ -1,7 +1,7 @@
 {
   "name": "create-terraform-file",
   "version": "0.0.1",
-  "description": "Create a terraform file from a github org's settings",
+  "description": "Generate terraform files from a target Github repository or organization.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -12,9 +12,20 @@
     "url": "git+https://github.com/giterate/create-terraform-file.git"
   },
   "author": "mmcknett",
-  "license": "ISC",
+  "license": "MIT",
+  "keywords": [
+    "github",
+    "giterate",
+    "terraform"
+  ],
   "bugs": {
     "url": "https://github.com/giterate/create-terraform-file/issues"
   },
-  "homepage": "https://github.com/giterate/create-terraform-file#readme"
+  "homepage": "https://github.com/giterate/create-terraform-file#readme",
+  "dependencies": {
+    "giterate": "0.0.0"
+  },
+  "devDependencies": {
+    "githulk": "^1.5.0"
+  }
 }
