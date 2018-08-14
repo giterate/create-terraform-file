@@ -63,3 +63,4 @@ typings/
 # Terraform files
 .terraform
 *.tf
+*.tfstate
